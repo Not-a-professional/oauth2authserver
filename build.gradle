@@ -1,0 +1,35 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
+    id 'java'
+}
+
+ext {
+    springCloudVersion = 'Finchley.SR2'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    maven { url 'http://maven.aliyun.com/mvn/repository/' }
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.cloud:spring-cloud-starter-oauth2:2.1.2.RELEASE'
+    compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2'
+    runtime group: 'mysql', name: 'mysql-connector-java'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-client'
+    compile 'org.projectlombok:lombok:1.16.22'
+}
